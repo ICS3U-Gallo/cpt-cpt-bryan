@@ -10,6 +10,8 @@ player_y = 33
 space_pressed = False
 player_y_reset = 33
 
+current_screen = "menu"
+
 def update(delta_time):
     global player_y, player_x, space_pressed, player_y_reset
     if player_y <= 33:
@@ -22,13 +24,28 @@ def update(delta_time):
 
 def on_draw():
     arcade.start_render()
-    arcade.draw_text("GEOMETRY DASH", WIDTH / 2 - 160, 400, arcade.color.BLACK, 30)
-    arcade.draw_rectangle_filled(player_x, player_y, 60, 60, arcade.color.YELLOW)
+    if current_screen == "menu":
+        main_menu()
+    elif current_screen == "instructions":
+        instructions_screen()
+    elif current_screen == "play":
+        play_screen()
 
 def on_key_press(key, modifiers):
-    global space_pressed
+    global space_pressed, current_screen
     if key == arcade.key.SPACE:
         space_pressed = True
+    if current_screen == "menu":
+        if key == arcade.key.I:
+            current_screen = "instructions"
+        elif key == arcade.key.P:
+            current_screen = "play"
+    elif current_screen == "play":
+        if key == arcade.key.ESCAPE:
+            current_screen = "menu"
+    elif current_screen == "instructions":
+        if key == arcade.key.ESCAPE:
+            current_screen = "menu"
 
 def on_key_release(key, modifiers):
     global space_pressed
@@ -38,7 +55,27 @@ def on_key_release(key, modifiers):
 def on_mouse_press(x, y, button, modifiers):
     pass
 
+def main_menu():
+    arcade.set_background_color(arcade.color.SKY_BLUE)
+    arcade.draw_text("GEOMETRY DASH", WIDTH / 2 - 160, 400, arcade.color.BLACK, 30)
+    arcade.draw_text("Main Menu", WIDTH / 2 - 100, 300, arcade.color.BLACK, 20)
+    arcade.draw_text("I for Instructions", WIDTH / 2 - 100, HEIGHT / 2 - 30, arcade.color.BLACK, font_size=20)
+    arcade.draw_text("P to play", WIDTH / 2 - 70, HEIGHT / 2 - 120, arcade.color.BLACK, font_size=20)
 
+
+def instructions_screen():
+    arcade.set_background_color(arcade.color.BLUE_GRAY)
+    arcade.draw_text("Instructions", WIDTH / 2 - 110, HEIGHT / 2 + 100, arcade.color.BLACK, font_size=30)
+    arcade.draw_text("Use space to make the square jump and avoid all obstacles!!",
+                     WIDTH / 2 - 300, HEIGHT / 2, arcade.color.BLACK, 15)
+    arcade.draw_text("ESC to go back", WIDTH / 2 - 100, HEIGHT / 2 - 100, arcade.color.BLACK, font_size=20)
+
+
+def play_screen():
+    arcade.set_background_color(arcade.color.ORANGE_RED)
+    arcade.draw_text("GEOMETRY DASH", WIDTH / 2 - 160, 400, arcade.color.BLACK, 30)
+    arcade.draw_rectangle_filled(player_x, player_y, 60, 60, arcade.color.YELLOW)
+    arcade.draw_text("ESC to go back", 540, 400, arcade.color.BLACK, 10)
 
 
 

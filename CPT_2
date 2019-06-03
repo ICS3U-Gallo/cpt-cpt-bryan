@@ -61,7 +61,7 @@ def on_key_press(key, modifiers):
     elif current_screen == "play":
         if key == arcade.key.ESCAPE:
             current_screen = "menu"
-            #set new viewport
+            arcade.set_viewport(0, WIDTH, 0, HEIGHT)
     elif current_screen == "instructions":
         if key == arcade.key.ESCAPE:
             current_screen = "menu"

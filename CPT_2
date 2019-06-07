@@ -8,10 +8,10 @@ HEIGHT = 480
 space_clicked = False
 space_released = False
 player_y_reset = 0
+player_x_reset = 0
 
 current_screen = "menu"
 player_loc = [0, 0]
-MOVEMENT_SPEED = 10
 x_rectangle = 200
 y_rectangle = 33
 
@@ -32,9 +32,9 @@ def setup():
     arcade.run()
 
 def update(delta_time):
-    global space_clicked, space_released, player_y_reset, MOVEMENT_SPEED, player_loc, keys_pressed
+    global space_clicked, space_released, player_y_reset, player_loc, keys_pressed
     if keys_pressed[arcade.key.RIGHT]:
-        player_loc[0] += MOVEMENT_SPEED
+        player_loc[0] += 10
     if space_clicked == True:
         player_loc[1] += 40
     elif space_clicked == False:
@@ -94,12 +94,14 @@ def instructions_screen():
 
 
 def play_screen():
-    global MOVEMENT_SPEED, player_loc, keys_pressed, x_rectangle, y_rectangle
+    global player_loc, keys_pressed, x_rectangle, y_rectangle, player_x_reset
     arcade.set_background_color(arcade.color.SKY_BLUE)
     arcade.draw_text("GEOMETRY DASH", WIDTH / 2 - 160, 400, arcade.color.BLACK, 30)
     arcade.draw_rectangle_filled(player_loc[0] + 33, player_loc[1] + 23, 60, 60, arcade.color.YELLOW)
     for i in range(10):
-        arcade.draw_rectangle_filled(x_rectangle + i*200, 0, 50, 50, arcade.color.BLACK)
+        arcade.draw_rectangle_filled(x_rectangle + i*300, 0, 50, 70, arcade.color.BLACK)
+        if player_loc[0] > x_rectangle:
+            player_loc[0] = player_x_reset
     arcade.draw_text("ESC to go back", 540, 400, arcade.color.BLACK, 10)
     arcade.set_viewport(-WIDTH / 2 + player_loc[0] + 320,
                         WIDTH / 2 + player_loc[0] + 320,

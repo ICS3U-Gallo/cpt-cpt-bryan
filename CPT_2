@@ -36,6 +36,7 @@ def update(delta_time):
         player_loc[0] += 10
     if space_clicked == True:
         player_loc[1] += 40
+        player_loc[0] += 10
     elif space_clicked == False:
         player_loc[1] = player_y_reset
 

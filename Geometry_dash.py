@@ -33,7 +33,7 @@ def setup():
 def update(delta_time):
     global space_clicked, space_released, player_y_reset, player_loc, keys_pressed
     if keys_pressed[arcade.key.RIGHT]:
-        player_loc[0] += 10
+        player_loc[0] += 4
     if space_clicked == True:
         player_loc[1] += 40
         player_loc[0] += 10

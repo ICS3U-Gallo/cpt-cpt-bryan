@@ -1,4 +1,5 @@
 import arcade
+import time
 
 
 WIDTH = 640
@@ -8,7 +9,7 @@ HEIGHT = 480
 space_clicked = False
 space_released = False
 player_y_reset = 0
-player_x_reset = 0
+player_x_reset = -100
 player_alive = True
 current_screen = "menu"
 player_loc = [-100, 0]
@@ -40,14 +41,14 @@ def update(delta_time):
     elif space_clicked == False:
         player_loc[1] = player_y_reset
 
-    for i in range(1):
+    for i in range(20):
         x = x_rectangle + i * 300
-        y = -20
         w = 50
         h = 70
         if player_loc[0] >= x and player_loc[0] <= x + w and player_loc[1] <= h:
             player_alive = False
             player_loc[0] = player_x_reset
+
 
 
 def on_draw():
@@ -108,7 +109,7 @@ def play_screen():
     arcade.set_background_color(arcade.color.SKY_BLUE)
     arcade.draw_text("GEOMETRY DASH", WIDTH / 2 - 160, 400, arcade.color.BLACK, 30)
     arcade.draw_rectangle_filled(player_loc[0] + 33, player_loc[1] + 23, 60, 60, arcade.color.YELLOW)
-    for i in range(1):
+    for i in range(20):
         x = x_rectangle + i*300
         y = -20
         w = 50

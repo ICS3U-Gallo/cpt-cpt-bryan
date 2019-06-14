@@ -1,5 +1,5 @@
 import arcade
-import time
+
 
 
 WIDTH = 640

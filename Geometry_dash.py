@@ -34,7 +34,7 @@ def setup():
 def update(delta_time):
     global space_clicked, space_released, player_y_reset, player_loc, keys_pressed, player_alive
     if keys_pressed[arcade.key.RIGHT]:
-        player_loc[0] += 4
+        player_loc[0] += 5
     if space_clicked == True:
         player_loc[1] += 40
         player_loc[0] += 10
@@ -48,6 +48,7 @@ def update(delta_time):
         if player_loc[0] >= x and player_loc[0] <= x + w and player_loc[1] <= h:
             player_alive = False
             player_loc[0] = player_x_reset
+
 
 
 
@@ -92,7 +93,7 @@ def main_menu():
     arcade.draw_text("Main Menu", WIDTH / 2 - 80, 300, arcade.color.BLACK, 20)
     arcade.draw_text("I for Instructions", WIDTH / 2 - 100, HEIGHT / 2 - 30, arcade.color.BLACK, font_size=20)
     arcade.draw_text("P to play", WIDTH / 2 - 70, HEIGHT / 2 - 120, arcade.color.BLACK, font_size=20)
-
+    player_loc[0] = player_x_reset
 
 
 def instructions_screen():
@@ -115,6 +116,12 @@ def play_screen():
         w = 50
         h =70
         arcade.draw_xywh_rectangle_filled(x, y, w, h, arcade.color.BLACK)
+
+    if player_loc[0] > x:
+        arcade.draw_text("WINNER!!!!", player_loc[0], 400, arcade.color.WHITE, 30)
+        arcade.draw_text("ESC to go back", player_loc[0], 300, arcade.color.WHITE, 10)
+        arcade.set_background_color(arcade.color.BLUE_SAPPHIRE)
+
 
     arcade.draw_text("ESC to go back", 540, 400, arcade.color.BLACK, 10)
     arcade.set_viewport(-WIDTH / 2 + player_loc[0] + 320,
